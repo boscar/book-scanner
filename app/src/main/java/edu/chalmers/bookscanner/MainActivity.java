@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.VideoView;
+import android.widget.MediaController;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button buttonplayvideo2 = (Button)findViewById(R.id.Button1);
+
 
         getWindow().setFormat(PixelFormat.UNKNOWN);
 
@@ -28,19 +31,10 @@ public class MainActivity extends AppCompatActivity {
         Uri uri2 = Uri.parse(uriPath2);
         mVideoView2.setVideoURI(uri2);
         mVideoView2.requestFocus();
-        mVideoView2.start();
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(mVideoView2);
+        mVideoView2.setMediaController(mediaController);
 
-        buttonplayvideo2.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                VideoView mVideoView2 = (VideoView) findViewById(R.id.VideoView1);
-                // VideoView mVideoView = new VideoView(this);
-                String uriPath = "android.resource://edu.chalmers.bookscanner/" + R.raw.gotseason2;
-                Uri uri2 = Uri.parse(uriPath);
-                mVideoView2.setVideoURI(uri2);
-                mVideoView2.requestFocus();
-                mVideoView2.start();
-            }
-        });
+        mVideoView2.start();
     }
 }

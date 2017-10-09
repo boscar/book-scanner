@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="edu.chalmers.bookscanner.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play Video!"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="6dp"
-        android:id="@+id/textView2" />
+    <FrameLayout
+        android:id="@+id/videoframe"
+        android:layout_width="fill_parent"
+        android:layout_height="400px"
+        android:background="#000"
+    >
 
     <VideoView
         android:id="@+id/VideoView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+
+    <ImageButton
+        android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="40dp" />
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@android:color/transparent"
+        android:src="@drawable/android" />
 
-</RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

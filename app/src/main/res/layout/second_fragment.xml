@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="edu.chalmers.bookscanner.SecondFragment">
-    
-</android.support.constraint.ConstraintLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="edu.chalmers.bookscanner.SecondFragment">
+
+<FrameLayout
+    android:id="@+id/videoframe"
+    android:layout_width="fill_parent"
+    android:layout_height="400px"
+    android:background="#000"
+    >
+
+    <VideoView
+        android:id="@+id/VideoView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:background="@android:color/transparent"
+        android:src="@drawable/android" />
+
+</FrameLayout>
+</LinearLayout>

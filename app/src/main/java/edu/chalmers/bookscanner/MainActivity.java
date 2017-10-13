@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getPicture(MainActivity.this);
+                Intent i = new Intent(MainActivity.this, TabbedPage. class);
+                startActivity(i);
             }
         });
     }

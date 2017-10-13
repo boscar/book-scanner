@@ -4,11 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.params.StreamConfigurationMap;
-
 import android.media.Image;
 import android.media.ImageReader;
 import android.os.Environment;
@@ -29,7 +27,6 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.hardware.camera2.CameraDevice;
 import android.os.Handler;
-import android.os.HandlerThread;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -46,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private Size previewsize;
     private Size jpegSizes[] = null;
     private CameraDevice cameraDevice;
-    CameraHandler camHandler;
     Button snap;
     private CaptureRequest.Builder previewBuilder;
     private CameraCaptureSession previewSession;
@@ -71,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
         assert textureView != null;
         textureView.setSurfaceTextureListener(surfaceTextureListener);
 
-        camHandler = new CameraHandler();
         snap=(Button)findViewById(R.id.captureFront);
         snap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPicture();
+                getPicture(MainActivity.this);
             }
         });
     }
@@ -166,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             {
             }
         }
-    void getPicture() {
+    void getPicture(final Context context) {
         if(cameraDevice==null)
         {
             return;
@@ -214,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 void save(byte[] bytes)
                 {
 
-                    File file12=getOutputMediaFile(getBaseContext(),activity);
+                    File file12=getOutputMediaFile(context);
                     OutputStream outputStream=null;
                     try
                     {
@@ -265,26 +260,29 @@ public class MainActivity extends AppCompatActivity {
         {
         }
     }
-    private static File getOutputMediaFile(Context context, Activity activity) {
+    private static File getOutputMediaFile(Context context) {
+        Activity activity = (Activity) context;
+        File mediaStorageDir;
         if (ActivityCompat.checkSelfPermission(context , Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(context, "No read write permission", Toast.LENGTH_SHORT).show();
-            ActivityCompat.requestPermissions( activity , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         }
-        File mediaStorageDir = new File(Environment.DIRECTORY_PICTURES, "BookScanner");
-//                Environment.getExternalStorageDirectory(),
-//                "MyCameraApp");
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("MyCameraApp", "failed to create directory");
-                return null;
+
+            mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "BookScanner");
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d("MyCameraApp", "failed to create directory");
+                    return null;
+                }
             }
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        File mediaFile;
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                + "IMG_" + timeStamp + ".jpg");
-        return mediaFile;
+            // Create a media file name
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            File mediaFile;
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+
+            return mediaFile;
+
     }
 
     void getChangedPreview() {

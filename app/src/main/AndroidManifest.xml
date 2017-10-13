@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera2.full" />
 
+<supports-screens android:largeScreens="true"
+    android:smallScreens="true"
+    android:normalScreens="true"
+    android:xlargeScreens="true"
+    ></supports-screens>
 
     <application
         android:allowBackup="true"

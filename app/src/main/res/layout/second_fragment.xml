@@ -9,14 +9,15 @@ tools:context="edu.chalmers.bookscanner.SecondFragment">
 <FrameLayout
     android:id="@+id/videoframe"
     android:layout_width="fill_parent"
-    android:layout_height="400px"
+    android:layout_height="600dp"
     android:background="#000"
-    >
+    android:layout_gravity="center_vertical|center_horizontal">
 
     <VideoView
         android:id="@+id/VideoView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"/>
 
 
     <ImageButton

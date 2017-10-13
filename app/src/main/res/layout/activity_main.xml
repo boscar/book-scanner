@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
     android:layout_margin="12dp"
@@ -8,16 +10,20 @@
     android:padding="10dp"
     android:gravity="bottom|center">
 
-    <Button
-        android:id="@+id/Scan"
-        android:layout_width="fill_parent"
+    <TextureView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center|bottom"
-        android:layout_marginTop="20dp"
-        android:background="#C01831"
-        android:onClick="meonFb"
-        android:text="Scan"
-        android:textColor="#ffffff" />
+        android:id="@+id/textureview"/>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/captureFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Find"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+    
+
+</RelativeLayout>
+

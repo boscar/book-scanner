@@ -1,5 +1,4 @@
 package edu.chalmers.bookscanner;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -37,6 +36,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+
 
 public class MainActivity extends AppCompatActivity {
     private TextureView textureView;
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         activity = getParent();
         textureView = (TextureView) findViewById(R.id.textureview);
         assert textureView != null;
@@ -316,6 +323,24 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+//=======
+//
+//        Button scanButton = (Button) findViewById(R.id.Scan);
+//        scanButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Log.i("clicks", "You Clicked B1");
+//                Intent i = new Intent(
+//                        MainActivity.this,
+//                        TabbedPage. class);
+//                startActivity(i);
+//            }
+//
+//        });
+//
+//>>>>>>> origin/master
     }
 }
 

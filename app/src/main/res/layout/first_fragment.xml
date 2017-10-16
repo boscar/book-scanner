@@ -90,34 +90,34 @@
                 android:layout_marginTop="50dp">
 
                 <LinearLayout
-                    android:id="@+id/xml_full_img_linear_below_view"
+                    android:id="@+id/firstlinear"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal" >
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/Cercie"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/cersei"/>
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/Cercie1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/cersei"/>
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/Cercie2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/cersei"/>
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/Cercie3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
@@ -125,7 +125,7 @@
                         android:src="@drawable/cersei"/>
 
 
-                    <ImageView
+                    <ImageButton
                         android:id="@+id/Cercie4"
                         android:layout_width="100dp"
                         android:layout_height="100dp"

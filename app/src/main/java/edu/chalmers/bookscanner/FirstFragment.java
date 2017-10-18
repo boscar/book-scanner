@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 public class FirstFragment extends Fragment {
@@ -22,6 +23,7 @@ private static final String TAG="Tab1Fragment";
     private PopupWindow popupWindow;
     private LayoutInflater layoutInflater;
     private FrameLayout bookLayout;
+    private ImageView testview;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ private static final String TAG="Tab1Fragment";
 
         cercieButton1 = (ImageButton) view.findViewById(R.id.Cercie1);
         bookLayout = (FrameLayout) view.findViewById(R.id.bookframe);
-
+        testview = (ImageView) view.findViewById(R.id.testcerseiimage);
 
         cercieButton1.setOnClickListener(new View.OnClickListener() {
             @Override

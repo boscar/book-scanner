@@ -97,44 +97,44 @@
                     android:orientation="horizontal" >
 
                     <ImageButton
-                        android:id="@+id/Cercie"
+                        android:id="@+id/FanartButton"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"
+                        android:src="@drawable/concept0small"
                         android:background="@android:color/transparent"/>
 
                     <ImageButton
-                        android:id="@+id/Cercie1"
+                        android:id="@+id/FanartButton1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"
+                        android:src="@drawable/concept1small"
                         android:background="@android:color/transparent"/>
 
                     <ImageButton
-                        android:id="@+id/Cercie2"
+                        android:id="@+id/FanartButton2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"
+                        android:src="@drawable/concept2small"
                         android:background="@android:color/transparent"/>
 
                     <ImageButton
-                        android:id="@+id/Cercie3"
+                        android:id="@+id/FanartButton3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"
+                        android:src="@drawable/concept3small"
                         android:background="@android:color/transparent"/>
 
 
                     <ImageButton
-                        android:id="@+id/Cercie4"
+                        android:id="@+id/FanartButton4"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"
+                        android:src="@drawable/concept4small"
                         android:background="@android:color/transparent"/>
 
 

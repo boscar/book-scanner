@@ -80,12 +80,21 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_black_faded"/>
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginTop="9dp"
                 android:textColor="@color/text_black"
                 android:textSize="16sp"
@@ -109,7 +118,7 @@
                 android:layout_gravity="left"
                 android:orientation="horizontal"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp">
+                android:layout_marginBottom="18dp">
 
                 <LinearLayout
                     android:id="@+id/xml_full_img_linear_below_view"
@@ -161,6 +170,12 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/text_black_faded"/>
 
         </RelativeLayout>
 

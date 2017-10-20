@@ -85,7 +85,13 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp">
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_black_faded"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -117,7 +123,7 @@
                 android:layout_gravity="left"
                 android:orientation="horizontal"
                 android:layout_marginTop="50dp"
-                android:layout_marginBottom="50dp">
+                android:layout_marginBottom="18dp">
 
                 <LinearLayout
                     android:id="@+id/firstlinear"
@@ -169,6 +175,12 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/text_black_faded"/>
 
         </RelativeLayout>
 

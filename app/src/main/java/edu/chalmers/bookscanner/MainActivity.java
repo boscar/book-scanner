@@ -12,6 +12,8 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hideStatusBar();
         cameraView = (SurfaceView) findViewById(R.id.surface_view);
         textView = (TextView) findViewById(R.id.text_view);
+
+        TypefaceUtils.setTypeface(textView, new TypefaceSpan(this, "OpenSans-Regular.ttf"));
 
         TextRecognizer textRecognizer = new TextRecognizer.Builder(this).build();
         if (!textRecognizer.isOperational()) {
@@ -103,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 public void release() {}
                 @Override
                 public void receiveDetections(Detector.Detections<TextBlock> detections) {
-
                     final SparseArray<TextBlock> items = detections.getDetectedItems();
                     if(items.size() != 0)
                     {
@@ -118,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
                                     stringBuilder.append("\n");
                                 }
                                 result = stringBuilder.toString();
-                                textView.setText(stringBuilder.toString());
                             }
                         });
                     }
@@ -139,6 +142,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Could not find Game of Thrones", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void hideStatusBar(){
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
     }
 
 }

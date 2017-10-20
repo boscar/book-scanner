@@ -11,6 +11,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -49,7 +50,6 @@ public class TabbedPage extends AppCompatActivity {
         adapter.addFragment(new FirstFragment(), "Book");
         adapter.addFragment(new SecondFragment(), "Movie");
         viewPager.setAdapter(adapter);
-
     }
 
     private void setCustomTitleTypeface(){

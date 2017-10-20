@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+        android:id="@+id/secondlinear"
     tools:context="edu.chalmers.bookscanner.SecondFragment">
         <FrameLayout
             android:id="@+id/videoframe"
@@ -100,41 +101,46 @@
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal" >
 
-                    <ImageView
-                        android:id="@+id/Cercie"
+                    <ImageButton
+                        android:id="@+id/CastButton"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"/>
+                        android:src="@drawable/cersei"
+                        android:background="@android:color/transparent"/>
 
-                    <ImageView
-                        android:id="@+id/Cercie1"
+                    <ImageButton
+                        android:id="@+id/CastButton1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"/>
+                        android:src="@drawable/daeny"
+                        android:background="@android:color/transparent"/>
 
-                    <ImageView
-                        android:id="@+id/Cercie2"
+                    <ImageButton
+                        android:id="@+id/CastButton2"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"/>
+                        android:src="@drawable/jon"
+                        android:background="@android:color/transparent"/>
 
-                    <ImageView
-                        android:id="@+id/Cercie3"
+                    <ImageButton
+                        android:id="@+id/CastButton3"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"/>
+                        android:src="@drawable/sansa"
+                        android:background="@android:color/transparent"/>
 
 
-                    <ImageView
-                        android:id="@+id/Cercie4"
+                    <ImageButton
+                        android:id="@+id/CastButton4"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/cersei"/>
+                        android:src="@drawable/tyrion"
+                        android:background="@android:color/transparent"/>
 
 
                 </LinearLayout>

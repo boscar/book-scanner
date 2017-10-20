@@ -1,31 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context="edu.chalmers.bookscanner.SecondFragment">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-<FrameLayout
-    android:id="@+id/videoframe"
-    android:layout_width="fill_parent"
-    android:layout_height="400px"
-    android:background="#000"
-    >
+    <LinearLayout
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+        android:id="@+id/secondlinear"
+    tools:context="edu.chalmers.bookscanner.SecondFragment">
+        <FrameLayout
+            android:id="@+id/videoframe"
+            android:layout_width="fill_parent"
+            android:layout_height="600px"
+            android:background="#000"
+            android:layout_gravity="center_vertical|center_horizontal">
 
-    <VideoView
-        android:id="@+id/VideoView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+            <VideoView
+                android:id="@+id/VideoView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"/>
 
 
-    <ImageButton
-        android:id="@+id/play_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@android:color/transparent"
-        android:src="@drawable/android" />
+            <ImageButton
+                android:id="@+id/play_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:background="@android:color/transparent"
+                android:src="@drawable/android" />
 
-</FrameLayout>
-</LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/BookName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Game of Thrones" />
+
+        <TextView
+            android:id="@+id/BookInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Season 2" />
+
+        <TextView
+            android:id="@+id/BookAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adventure, Drama and Fantasy" />
+
+        <TextView
+            android:id="@+id/BookGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Description" />
+
+        <TextView
+            android:id="@+id/BookDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text='Time is out of joint. The summer of peace and plenty, ten years long, is drawing to a close, and the harsh, chill winter approaches like an angry beast. Two great leaders—Lord Eddard Stark and Robert Baratheon—who held sway over an age of enforced peace are dead...victims of royal treachery' />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Cast" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="18dp"
+                android:text="See more >" />
+
+            <HorizontalScrollView
+                android:id="@+id/xml_full_img_hor_below_view"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="left"
+                android:orientation="horizontal"
+                android:layout_marginTop="50dp">
+
+                <LinearLayout
+                    android:id="@+id/xml_full_img_linear_below_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal" >
+
+                    <ImageButton
+                        android:id="@+id/CastButton"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/cersei"
+                        android:background="@android:color/transparent"/>
+
+                    <ImageButton
+                        android:id="@+id/CastButton1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/daeny"
+                        android:background="@android:color/transparent"/>
+
+                    <ImageButton
+                        android:id="@+id/CastButton2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/jon"
+                        android:background="@android:color/transparent"/>
+
+                    <ImageButton
+                        android:id="@+id/CastButton3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sansa"
+                        android:background="@android:color/transparent"/>
+
+
+                    <ImageButton
+                        android:id="@+id/CastButton4"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/tyrion"
+                        android:background="@android:color/transparent"/>
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

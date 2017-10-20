@@ -1,6 +1,7 @@
 package edu.chalmers.bookscanner;
 
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.media.Image;
@@ -9,10 +10,16 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.VideoView;
 import android.widget.MediaController;
@@ -24,12 +31,33 @@ public class SecondFragment extends Fragment {
     ImageButton playButton;
 
 
+    private ImageButton castButton;
+    private ImageButton castButton1;
+    private ImageButton castButton2;
+    private ImageButton castButton3;
+    private ImageButton castButton4;
+
+    private PopupWindow popupWindow;
+    private LayoutInflater layoutInflater;
+    private LinearLayout bookLayout;
+    private ImageView testview;
+
     //getWindow().setFormat(PixelFormat.UNKNOWN);
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.second_fragment, container, false);
+
+
+        castButton = (ImageButton) view.findViewById(R.id.CastButton);
+        castButton1 = (ImageButton) view.findViewById(R.id.CastButton1);
+        castButton2 = (ImageButton) view.findViewById(R.id.CastButton2);
+        castButton3 = (ImageButton) view.findViewById(R.id.CastButton3);
+        castButton4 = (ImageButton) view.findViewById(R.id.CastButton4);
+
+        bookLayout = (LinearLayout) view.findViewById(R.id.xml_full_img_linear_below_view);
+        testview = (ImageView) view.findViewById(R.id.testcerseiimage);
 
         final VideoView mVideoView2 = (VideoView) view.findViewById(R.id.VideoView1);
 
@@ -56,6 +84,126 @@ public class SecondFragment extends Fragment {
                     mediaController.show();
                     playButton.setVisibility(View.GONE);
                 }
+            }
+        });
+
+        castButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = (View)  layoutInflater.inflate(R.layout.test,null);
+
+                ImageView image = (ImageView)view.findViewById(R.id.testcerseiimage);
+                image.setImageResource(R.drawable.cersei);
+
+                popupWindow = new PopupWindow(view,400,400,true);
+                popupWindow.showAtLocation(bookLayout, Gravity.CENTER,0,0);
+
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean  onTouch(View view, MotionEvent motionEvent) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        castButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = (View)  layoutInflater.inflate(R.layout.test,null);
+
+                ImageView image = (ImageView)view.findViewById(R.id.testcerseiimage);
+                image.setImageResource(R.drawable.daeny);
+
+                popupWindow = new PopupWindow(view,400,400,true);
+                popupWindow.showAtLocation(bookLayout, Gravity.CENTER,0,0);
+
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean  onTouch(View view, MotionEvent motionEvent) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        castButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = (View)  layoutInflater.inflate(R.layout.test,null);
+
+                ImageView image = (ImageView)view.findViewById(R.id.testcerseiimage);
+                image.setImageResource(R.drawable.jon);
+
+                popupWindow = new PopupWindow(view,400,400,true);
+                popupWindow.showAtLocation(bookLayout, Gravity.CENTER,0,0);
+
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean  onTouch(View view, MotionEvent motionEvent) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        castButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = (View)  layoutInflater.inflate(R.layout.test,null);
+
+                ImageView image = (ImageView)view.findViewById(R.id.testcerseiimage);
+                image.setImageResource(R.drawable.sansa);
+
+                popupWindow = new PopupWindow(view,400,400,true);
+                popupWindow.showAtLocation(bookLayout, Gravity.CENTER,0,0);
+
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean  onTouch(View view, MotionEvent motionEvent) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
+            }
+        });
+
+        castButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                layoutInflater = (LayoutInflater) getContext().getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view = (View)  layoutInflater.inflate(R.layout.test,null);
+
+                ImageView image = (ImageView)view.findViewById(R.id.testcerseiimage);
+                image.setImageResource(R.drawable.tyrion);
+
+                popupWindow = new PopupWindow(view,400,400,true);
+                popupWindow.showAtLocation(bookLayout, Gravity.CENTER,0,0);
+
+                view.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean  onTouch(View view, MotionEvent motionEvent) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
             }
         });
 

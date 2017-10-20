@@ -24,6 +24,7 @@ import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -136,14 +137,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(MainActivity.this, TabbedPage. class);
-                i.putExtra("BookDetail", result);
-                startActivity(i);
+                if(result.contains("game")|| result.contains("thrones") || result.contains("martin") || result.contains("george") || result.contains("kung")) {
+                    i.putExtra("BookDetail", result);
+                    startActivity(i);
+                }else
+                    Toast.makeText(getBaseContext(), "Could not find Game of Thrones", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 }
-
-
-
 

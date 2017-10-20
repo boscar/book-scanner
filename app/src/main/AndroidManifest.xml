@@ -26,9 +26,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".TabbedPage">
+
             </activity>
-        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
+        
+
+        </activity>
+
+        <activity android:name=".fanArtView">
+        </activity>
+
+        <activity android:name=".castView">
+        </activity>
+  <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr"/>
+
     </application>
 
 </manifest>

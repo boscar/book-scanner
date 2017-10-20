@@ -1,6 +1,7 @@
 package edu.chalmers.bookscanner;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 public class FirstFragment extends Fragment {
 
@@ -164,6 +166,17 @@ private static final String TAG="Tab1Fragment";
             }
         });
 
+        final Context context= this.getContext();
+        final TextView seeMore = (TextView) view.findViewById(R.id.seeMore);
+
+        seeMore.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(context, fanArtView.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 }
+

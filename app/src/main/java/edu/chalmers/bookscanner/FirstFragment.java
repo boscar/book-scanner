@@ -2,10 +2,13 @@ package edu.chalmers.bookscanner;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,6 +39,7 @@ private static final String TAG="Tab1Fragment";
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.first_fragment, container, false);
+        setCustomTypeface(view);
 
         fanArtButton = (ImageButton) view.findViewById(R.id.FanartButton);
         fanArtButton1 = (ImageButton) view.findViewById(R.id.FanartButton1);
@@ -177,6 +181,28 @@ private static final String TAG="Tab1Fragment";
         });
 
         return view;
+    }
+
+    private void setCustomTypeface(View baseView){
+        TypefaceSpan openSansLight = new TypefaceSpan(getContext(), "OpenSans-Light.ttf");
+        TypefaceSpan openSans = new TypefaceSpan(getContext(), "OpenSans-Regular.ttf");
+        TypefaceSpan openSansSemiBold = new TypefaceSpan(getContext(), "OpenSans-SemiBold.ttf");
+
+        TextView title = baseView.findViewById(R.id.BookName);
+        TextView info = baseView.findViewById(R.id.BookInfo);
+        TextView author = baseView.findViewById(R.id.BookAuthor);
+        TextView genre = baseView.findViewById(R.id.BookGenre);
+        TextView desc = baseView.findViewById(R.id.BookDescription);
+        TextView fanArt = baseView.findViewById(R.id.textView);
+        TextView seeMore = baseView.findViewById(R.id.seeMore);
+
+        TypefaceUtils.setTypeface(title, openSansSemiBold);
+        TypefaceUtils.setTypeface(info, openSansLight);
+        TypefaceUtils.setTypeface(author, openSans);
+        TypefaceUtils.setTypeface(genre, openSans);
+        TypefaceUtils.setTypeface(desc, openSansLight);
+        TypefaceUtils.setTypeface(fanArt, openSans);
+        TypefaceUtils.setTypeface(seeMore, openSans);
     }
 }
 

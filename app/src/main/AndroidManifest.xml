@@ -18,27 +18,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TabbedPage">
+        <activity
+            android:name=".TabbedPage"
+            android:theme="@style/AppTheme.NoActionBar">
 
             </activity>
-        
-
-        </activity>
 
         <activity android:name=".fanArtView">
         </activity>
 
         <activity android:name=".castView">
         </activity>
-  <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr"/>
+      <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
+                android:value="ocr"/>
 
     </application>
 

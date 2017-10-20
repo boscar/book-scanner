@@ -49,6 +49,7 @@ public class SecondFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.second_fragment, container, false);
+        setCustomTypeface(view);
 
 
         castButton = (ImageButton) view.findViewById(R.id.CastButton);
@@ -219,4 +220,25 @@ public class SecondFragment extends Fragment {
 
         return view;
     }
+
+    private void setCustomTypeface(View baseView){
+        TypefaceSpan openSansLight = new TypefaceSpan(getContext(), "OpenSans-Light.ttf");
+        TypefaceSpan openSans = new TypefaceSpan(getContext(), "OpenSans-Regular.ttf");
+        TypefaceSpan openSansSemiBold = new TypefaceSpan(getContext(), "OpenSans-SemiBold.ttf");
+
+        TextView title = baseView.findViewById(R.id.BookName);
+        TextView info = baseView.findViewById(R.id.BookInfo);
+        TextView author = baseView.findViewById(R.id.BookAuthor);
+        TextView desc = baseView.findViewById(R.id.BookDescription);
+        TextView fanArt = baseView.findViewById(R.id.textView);
+        TextView seeMore = baseView.findViewById(R.id.seeMore);
+
+        TypefaceUtils.setTypeface(title, openSansSemiBold);
+        TypefaceUtils.setTypeface(info, openSans);
+        TypefaceUtils.setTypeface(author, openSansLight);
+        TypefaceUtils.setTypeface(desc, openSansLight);
+        TypefaceUtils.setTypeface(fanArt, openSans);
+        TypefaceUtils.setTypeface(seeMore, openSans);
+    }
+
 }

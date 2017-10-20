@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#FFF"
         tools:context="edu.chalmers.bookscanner.FirstFragment"
         android:weightSum="1">
 
@@ -17,7 +18,6 @@
             android:id="@+id/bookframe"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
-            android:background="#FFF"
             android:layout_gravity="center_vertical|center_horizontal">
 
 
@@ -25,52 +25,84 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="24dp"
                 app:srcCompat="@drawable/clashofkings"
                 android:layout_gravity="center_vertical|center_horizontal"/>
         </FrameLayout>
 
 
         <TextView
-                android:id="@+id/BookName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="The clash of kings" />
+            android:id="@+id/BookName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/text_black"
+            android:text="The clash of kings" />
 
         <TextView
             android:id="@+id/BookInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="18dp"
+            android:textColor="@color/text_black"
+            android:layout_marginEnd="18dp"
             android:text='The second book in "Song of Ice and Fire"' />
 
         <TextView
             android:id="@+id/BookAuthor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/text_black"
             android:text='By George R.R. Martin' />
 
         <TextView
             android:id="@+id/BookGenre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:text='Fantasy'
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:textColor="@color/text_black"
             android:layout_marginTop="20dp"/>
 
         <TextView
             android:id="@+id/BookDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginStart="18dp"
+            android:textColor="@color/text_black"
+            android:layout_marginEnd="18dp"
             android:text='Time is out of joint. The summer of peace and plenty, ten years long, is drawing to a close, and the harsh, chill winter approaches like an angry beast. Two great leaders—Lord Eddard Stark and Robert Baratheon—who held sway over an age of enforced peace are dead...victims of royal treachery' />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fan Art"
-            android:layout_marginTop="20dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/text_black_faded"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="Fan Art"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:textColor="@color/text_black"
+                android:layout_marginTop="9dp"/>
 
 
             <TextView
@@ -79,21 +111,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="18dp"
+                android:textSize="14sp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_black_faded"
                 android:text="See more >" />
 
             <HorizontalScrollView
                 android:id="@+id/xml_full_img_hor_below_view"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:orientation="horizontal"
-                android:layout_marginTop="50dp">
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="18dp">
 
                 <LinearLayout
                     android:id="@+id/firstlinear"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
                     android:orientation="horizontal" >
 
                     <ImageButton
@@ -140,6 +175,12 @@
 
                 </LinearLayout>
             </HorizontalScrollView>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="0.5dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/text_black_faded"/>
 
         </RelativeLayout>
 

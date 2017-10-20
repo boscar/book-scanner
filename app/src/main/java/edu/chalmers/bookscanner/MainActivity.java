@@ -1,349 +1,147 @@
 package edu.chalmers.bookscanner;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.content.Intent;
+import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import com.google.android.gms.vision.CameraSource;
+import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.vision.text.TextRecognizer;
+
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.ImageFormat;
-import android.graphics.SurfaceTexture;
-import android.hardware.camera2.params.StreamConfigurationMap;
-import android.media.Image;
-import android.media.ImageReader;
-import android.os.Environment;
-import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.hardware.camera2.*;
 import android.util.Log;
-import android.util.Size;
-import android.util.SparseIntArray;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Surface;
-import android.view.TextureView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-import android.hardware.camera2.CameraDevice;
-import android.os.Handler;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import android.util.SparseArray;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.widget.TextView;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
-    private TextureView textureView;
-    private Size previewsize;
-    private Size jpegSizes[] = null;
-    private CameraDevice cameraDevice;
     Button snap;
-    private CaptureRequest.Builder previewBuilder;
-    private CameraCaptureSession previewSession;
-    private static final int REQUEST_CAMERA_PERMISSION = 101;
-    private static final SparseIntArray ORIENTATIONS=new SparseIntArray();
-    public Activity activity;
-    static
-    {
-        ORIENTATIONS.append(Surface.ROTATION_0,90);
-        ORIENTATIONS.append(Surface.ROTATION_90,0);
-        ORIENTATIONS.append(Surface.ROTATION_180,270);
-        ORIENTATIONS.append(Surface.ROTATION_270,180);
-    }
+    SurfaceView cameraView;
+    TextView textView;
+    CameraSource cameraSource;
+    final int RequestCameraPermissionID = 1001;
+    String result = "";
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case RequestCameraPermissionID: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    try {
+                        cameraSource.start(cameraView.getHolder());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            break;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cameraView = (SurfaceView) findViewById(R.id.surface_view);
+        textView = (TextView) findViewById(R.id.text_view);
 
-        activity = getParent();
-        textureView = (TextureView) findViewById(R.id.textureview);
-        assert textureView != null;
-        textureView.setSurfaceTextureListener(surfaceTextureListener);
+        TextRecognizer textRecognizer = new TextRecognizer.Builder(this).build();
+        if (!textRecognizer.isOperational()) {
+            Log.w("MainActivity", "Detector dependencies are not yet available");
+        } else {
+
+            cameraSource = new CameraSource.Builder(getApplicationContext(), textRecognizer)
+                    .setFacing(CameraSource.CAMERA_FACING_BACK)
+                    .setRequestedPreviewSize(1280, 1024)
+                    .setRequestedFps(2.0f)
+                    .setAutoFocusEnabled(true)
+                    .build();
+            cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
+                @Override
+                public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+                    try {
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                            ActivityCompat.requestPermissions(MainActivity.this,
+                                    new String[]{Manifest.permission.CAMERA},
+                                    RequestCameraPermissionID);
+                            return;
+                        }
+                        cameraSource.start(cameraView.getHolder());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+                    cameraSource.stop();
+                }
+            });
+
+            textRecognizer.setProcessor(new Detector.Processor<TextBlock>() {
+                @Override
+                public void release() {}
+                @Override
+                public void receiveDetections(Detector.Detections<TextBlock> detections) {
+
+                    final SparseArray<TextBlock> items = detections.getDetectedItems();
+                    if(items.size() != 0)
+                    {
+                        textView.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                StringBuilder stringBuilder = new StringBuilder();
+                                for(int i =0;i<items.size();++i)
+                                {
+                                    TextBlock item = items.valueAt(i);
+                                    stringBuilder.append(item.getValue());
+                                    stringBuilder.append("\n");
+                                }
+                                result = stringBuilder.toString();
+                                textView.setText(stringBuilder.toString());
+                            }
+                        });
+                    }
+                }
+            });
+        }
 
         snap=(Button)findViewById(R.id.captureFront);
         snap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPicture(MainActivity.this);
+
                 Intent i = new Intent(MainActivity.this, TabbedPage. class);
+                i.putExtra("BookDetail", result);
                 startActivity(i);
             }
         });
     }
-    private TextureView.SurfaceTextureListener surfaceTextureListener= new TextureView.SurfaceTextureListener() {
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-            openCamera();
-        }
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-        }
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-        }
-    };
 
-    private CameraDevice.StateCallback stateCallback=new CameraDevice.StateCallback() {
-        @Override
-        public void onOpened(CameraDevice camera) {
-            cameraDevice=camera;
-            startCamera();
-        }
-        @Override
-        public void onDisconnected(CameraDevice camera) {
-        }
-        @Override
-        public void onError(CameraDevice camera, int error) {
-        }
-    };
-
-    public void openCamera() {
-        CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
-            String camerId = manager.getCameraIdList()[0];
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(camerId);
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-            previewsize = map.getOutputSizes(SurfaceTexture.class)[0];
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "No camera access permission", Toast.LENGTH_SHORT).show();
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},1);
-                manager.openCamera(camerId, stateCallback, null);
-                //return;
-            }else
-                manager.openCamera(camerId, stateCallback, null);
-
-        }catch (Exception e)
-        {
-        }
-    }
-
-    void  startCamera() {
-            if(cameraDevice==null||!textureView.isAvailable()|| previewsize==null)
-            {
-                return;
-            }
-            SurfaceTexture texture=textureView.getSurfaceTexture();
-            if(texture==null)
-            {
-                return;
-            }
-            texture.setDefaultBufferSize(previewsize.getWidth(),previewsize.getHeight());
-            Surface surface = new Surface(texture);
-            try
-            {
-                previewBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-            }catch (Exception e)
-            {
-            }
-            previewBuilder.addTarget(surface);
-            try
-            {
-                cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback() {
-                    @Override
-                    public void onConfigured(CameraCaptureSession session) {
-                        previewSession=session;
-                        getChangedPreview();
-                    }
-                    @Override
-                    public void onConfigureFailed(CameraCaptureSession session) {
-                    }
-                },null);
-            }catch (Exception e)
-            {
-            }
-        }
-    void getPicture(final Context context) {
-        if(cameraDevice==null)
-        {
-            return;
-        }
-        CameraManager manager=(CameraManager)getSystemService(Context.CAMERA_SERVICE);
-        try
-        {
-            CameraCharacteristics characteristics=manager.getCameraCharacteristics(cameraDevice.getId());
-            if(characteristics!=null)
-            {
-                jpegSizes=characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
-            }
-            int width=640,height=480;
-            if(jpegSizes!=null && jpegSizes.length>0)
-            {
-                width=jpegSizes[0].getWidth();
-                height=jpegSizes[0].getHeight();
-            }
-            ImageReader reader=ImageReader.newInstance(width,height,ImageFormat.JPEG,1);
-            List<Surface> outputSurfaces=new ArrayList<Surface>(2);
-            outputSurfaces.add(reader.getSurface());
-            outputSurfaces.add(new Surface(textureView.getSurfaceTexture()));
-            final CaptureRequest.Builder capturebuilder=cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
-            capturebuilder.addTarget(reader.getSurface());
-            capturebuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-            int rotation=getWindowManager().getDefaultDisplay().getRotation();
-            capturebuilder.set(CaptureRequest.JPEG_ORIENTATION,ORIENTATIONS.get(rotation));
-            ImageReader.OnImageAvailableListener imageAvailableListener=new ImageReader.OnImageAvailableListener() {
-                @Override
-                public void onImageAvailable(ImageReader reader) {
-                    Image image = null;
-                    try {
-                        image = reader.acquireLatestImage();
-                        ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                        byte[] bytes = new byte[buffer.capacity()];
-                        buffer.get(bytes);
-                        save(bytes);
-                    } catch (Exception ee) {
-                    }
-                    finally {
-                        if(image!=null)
-                            image.close();
-                    }
-                }
-                void save(byte[] bytes)
-                {
-
-                    File file12=getOutputMediaFile(context);
-                    OutputStream outputStream=null;
-                    try
-                    {
-                        outputStream=new FileOutputStream(file12);
-                        outputStream.write(bytes);
-                    }catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }finally {
-                        try {
-                            if (outputStream != null)
-                                outputStream.close();
-                        }catch (Exception e){}
-                    }
-                }
-            };
-            HandlerThread handlerThread=new HandlerThread("takepicture");
-            handlerThread.start();
-            final Handler handler=new Handler(handlerThread.getLooper());
-            reader.setOnImageAvailableListener(imageAvailableListener,handler);
-            final CameraCaptureSession.CaptureCallback  previewSSession=new CameraCaptureSession.CaptureCallback() {
-                @Override
-                public void onCaptureStarted(CameraCaptureSession session, CaptureRequest request, long timestamp, long frameNumber) {
-                    super.onCaptureStarted(session, request, timestamp, frameNumber);
-                }
-                @Override
-                public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
-                    super.onCaptureCompleted(session, request, result);
-                    startCamera();
-                }
-            };
-            cameraDevice.createCaptureSession(outputSurfaces, new CameraCaptureSession.StateCallback() {
-                @Override
-                public void onConfigured(CameraCaptureSession session) {
-                    try
-                    {
-                        session.capture(capturebuilder.build(),previewSSession,handler);
-                    }catch (Exception e)
-                    {
-                    }
-                }
-                @Override
-                public void onConfigureFailed(CameraCaptureSession session) {
-                }
-            },handler);
-        }
-        catch (Exception e)
-        {
-        }
-    }
-    private static File getOutputMediaFile(Context context) {
-        Activity activity = (Activity) context;
-        File mediaStorageDir;
-        if (ActivityCompat.checkSelfPermission(context , Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(context, "No read write permission", Toast.LENGTH_SHORT).show();
-            ActivityCompat.requestPermissions(activity , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-        }
-
-            mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "BookScanner");
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdirs()) {
-                    Log.d("MyCameraApp", "failed to create directory");
-                    return null;
-                }
-            }
-            // Create a media file name
-            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            File mediaFile;
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-
-            return mediaFile;
-
-    }
-
-    void getChangedPreview() {
-        if(cameraDevice==null)
-        {
-            return;
-        }
-        previewBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
-        HandlerThread thread=new HandlerThread("changed Preview");
-        thread.start();
-        Handler handler=new Handler(thread.getLooper());
-        try
-        {
-            previewSession.setRepeatingRequest(previewBuilder.build(), null, handler);
-        }catch (Exception e){}
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-//=======
-//
-//        Button scanButton = (Button) findViewById(R.id.Scan);
-//        scanButton.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                // TODO Auto-generated method stub
-//                Log.i("clicks", "You Clicked B1");
-//                Intent i = new Intent(
-//                        MainActivity.this,
-//                        TabbedPage. class);
-//                startActivity(i);
-//            }
-//
-//        });
-//
-//>>>>>>> origin/master
-    }
 }
 
 

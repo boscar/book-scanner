@@ -26,7 +26,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".TabbedPage">
-            </activity>
+        </activity>
+
+        <activity android:name=".fanArtView">
+        </activity>
+
+        <activity android:name=".castView">
+        </activity>
     </application>
 
 </manifest>

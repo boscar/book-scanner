@@ -2,6 +2,7 @@ package edu.chalmers.bookscanner;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.media.Image;
@@ -204,6 +205,15 @@ public class SecondFragment extends Fragment {
                         return true;
                     }
                 });
+            }
+        });
+        final Context context= this.getContext();
+        final TextView seeMore = (TextView) view.findViewById(R.id.seeMore);
+
+        seeMore.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(context, castView.class);
+                startActivity(intent);
             }
         });
 

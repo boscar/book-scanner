@@ -28,8 +28,15 @@
                 android:layout_margin="24dp"
                 app:srcCompat="@drawable/clashofkings"
                 android:layout_gravity="center_vertical|center_horizontal"/>
+
         </FrameLayout>
 
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            app:srcCompat="@drawable/starsraiting" />
 
         <TextView
             android:id="@+id/BookName"

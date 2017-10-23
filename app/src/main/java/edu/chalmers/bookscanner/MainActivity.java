@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent i = new Intent(MainActivity.this, TabbedPage. class);
-                if(result.contains("game")|| result.contains("thrones") || result.contains("martin") || result.contains("george") || result.contains("kung")) {
+                if(result.toLowerCase().contains("game")|| result.toLowerCase().contains("thrones") || result.toLowerCase().contains("martin") || result.toLowerCase().contains("george") || result.toLowerCase().contains("kung")) {
                     i.putExtra("BookDetail", result);
                     startActivity(i);
                 }else
